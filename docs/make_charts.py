@@ -44,7 +44,7 @@ def save_bar_chart(query, x_col, y_col, title, filename, y_label, top_n=10):
     plt.tight_layout()
     plt.savefig(os.path.join(OUT_DIR, filename), dpi=160)
     plt.close()
-    
+
 def save_two_bar_chart(query, title, filename, y_label):
     rows = con.execute(query).fetchall()
     if not rows:
@@ -135,6 +135,23 @@ save_two_bar_chart(
     filename="05_review_score_on_time_vs_late.png",
     y_label="avg_review_score"
 )
+# 6) Overall retention curve (month 0-6)
+save_line_chart(
+    """
+    SELECT
+      month_number,
+      AVG(retention_rate) AS avg_retention_rate
+    FROM mart.customer_cohort_retention
+    GROUP BY 1
+    ORDER BY 1
+    """,
+    x_col="month_number",
+    y_col="avg_retention_rate",
+    title="Customer Retention Curve (Cohorts Avg, Month 0-6)",
+    filename="06_retention_curve_month0_6.png",
+    y_label="avg_retention_rate"
+)
+
 
 
 print(f"Saved charts into: {OUT_DIR}")

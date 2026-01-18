@@ -15,3 +15,6 @@ Average Review Score (Monthly)
 
 On-time vs Late Delivery (Review Impact)  
 ![Review Impact](images/dashboard_screenshots/05_review_score_on_time_vs_late.png)
+
+Customer Retention (Cohort Avg, Month 0–6)  
+![Retention Curve](images/dashboard_screenshots/06_retention_curve_month0_6.png)
