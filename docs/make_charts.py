@@ -27,6 +27,7 @@ def save_line_chart(query, x_col, y_col, title, filename, y_label):
     plt.close()
 
 def save_bar_chart(query, x_col, y_col, title, filename, y_label, top_n=10):
+
     rows = con.execute(query).fetchall()
     if not rows:
         raise RuntimeError(f"No data returned for chart: {title}")
@@ -43,7 +44,23 @@ def save_bar_chart(query, x_col, y_col, title, filename, y_label, top_n=10):
     plt.tight_layout()
     plt.savefig(os.path.join(OUT_DIR, filename), dpi=160)
     plt.close()
+    
+def save_two_bar_chart(query, title, filename, y_label):
+    rows = con.execute(query).fetchall()
+    if not rows:
+        raise RuntimeError("No data returned")
 
+    labels = [r[0] for r in rows]
+    values = [r[2] for r in rows]  # avg_review_score
+
+    plt.figure()
+    plt.bar(labels, values)
+    plt.title(title)
+    plt.xlabel("delivery_status")
+    plt.ylabel(y_label)
+    plt.tight_layout()
+    plt.savefig(os.path.join(OUT_DIR, filename), dpi=160)
+    plt.close()
 # 1) Revenue trend (monthly)
 save_line_chart(
     """
@@ -110,6 +127,14 @@ save_line_chart(
     title="Average Review Score (Monthly)",
     filename="04_avg_review_score_monthly.png",
     y_label="avg_review_score"
+
+)# 5) Late vs On-time review score
+save_two_bar_chart(
+    "SELECT * FROM mart.delivery_review_impact ORDER BY delivery_status",
+    title="Average Review Score: On-time vs Late Deliveries",
+    filename="05_review_score_on_time_vs_late.png",
+    y_label="avg_review_score"
 )
+
 
 print(f"Saved charts into: {OUT_DIR}")

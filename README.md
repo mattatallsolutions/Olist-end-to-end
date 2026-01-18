@@ -12,3 +12,6 @@ On-Time Delivery Rate (Monthly)
 
 Average Review Score (Monthly)  
 ![Avg Review Score](images/dashboard_screenshots/04_avg_review_score_monthly.png)
+
+On-time vs Late Delivery (Review Impact)  
+![Review Impact](images/dashboard_screenshots/05_review_score_on_time_vs_late.png)
