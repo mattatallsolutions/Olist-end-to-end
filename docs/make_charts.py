@@ -151,6 +151,21 @@ save_line_chart(
     filename="06_retention_curve_month0_6.png",
     y_label="avg_retention_rate"
 )
+# 7) Worst sellers by late delivery rate
+save_bar_chart(
+    """
+    SELECT seller_id, late_rate
+    FROM mart.seller_delay_ranking
+    ORDER BY late_rate DESC
+    LIMIT 10
+    """,
+    x_col="seller_id",
+    y_col="late_rate",
+    title="Top 10 Sellers by Late Delivery Rate",
+    filename="07_worst_sellers_late_rate.png",
+    y_label="late_rate",
+    top_n=10
+)
 
 
 

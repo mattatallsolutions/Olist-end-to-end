@@ -19,5 +19,9 @@ On-time vs Late Delivery (Review Impact)
 Customer Retention (Cohort Avg, Month 0–6)  
 ![Retention Curve](images/dashboard_screenshots/06_retention_curve_month0_6.png)
 
+Worst Sellers by Late Delivery Rate  
+![Worst Sellers](images/dashboard_screenshots/07_worst_sellers_late_rate.png)
+
+
 ## Executive Summary
 See `docs/executive_summary.md`.
